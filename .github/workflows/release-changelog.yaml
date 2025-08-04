@@ -1,0 +1,38 @@
+name: Update changelog for release
+
+on:
+  release:
+    types: [ created ]
+
+permissions:
+  contents: write
+
+jobs:
+  update-release-changelog:
+    if: startsWith(github.ref, 'refs/tags/v')
+    name: Generate changelog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # To use `git describe --tags`
+
+      - name: Setup Task
+        uses: arduino/setup-task@v2
+
+      - name: Generate changelog
+        uses: orhun/git-cliff-action@v3
+        with:
+          config: cliff.toml
+          args: --verbose
+        env:
+          OUTPUT: CHANGELOG.md
+
+      - name: Commit Changelog
+        run : |
+          git config --global user.name 'github-actions' 
+          git config --global user.email 'github-actions@github.com'
+          git add CHANGELOG.md
+          git commit -m "Update CHANGELOG.md"
+          git push https://github.com/${{ github.repository }}.git HEAD:main
