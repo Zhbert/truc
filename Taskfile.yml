@@ -6,9 +6,16 @@ vars:
 
 
 tasks:
+  prepare:
+    desc: 'Create folder for results of building'
+    cmds:
+      - |
+        task clean
+        mkdir result
   build-all:
     desc: 'Build for all platforms and architectures'
     cmds:
+      - task: prepare
       - task: build-loop
         vars:
           GOOS: GOOS="linux"
@@ -66,3 +73,8 @@ tasks:
         cd temp
         tar -czf ../truc-{{ .VERSION }}-{{ .PLATFORM }}.tar.gz .
         mv ../truc-{{ .VERSION }}-{{ .PLATFORM }}.tar.gz ../result/truc-{{ .VERSION }}-{{ .PLATFORM }}.tar.gz
+  clean:
+    desc: 'Clean files and folders'
+    cmds:
+      - |
+        rm -rf ./result
