@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Fixes
+
+- *(docs)* Fix license creating in result bundle (#2)
+
 ## [0.1.0] - 2025-08-06
 
 ### Features
