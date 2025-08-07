@@ -69,7 +69,7 @@ tasks:
         rm -rf temp && mkdir temp
         {{ .GOOS }} {{ .GOARCH }} go build -ldflags="-X 'truc/cmd/version.Version={{ .VERSION }}'" -o temp/truc{{ if .WIN }}.exe{{ end }}
         cp LICENSE temp/LICENSE{{ if .WIN }}.txt{{ end }}
-        echo "Copy the executable file to $PATH." >> temp/INSTALL{{ if .WIN }}.txt{{ end }}
+        echo "Copy the executable file to \$PATH." >> temp/INSTALL{{ if .WIN }}.txt{{ end }}
         cd temp
         tar -czf ../truc-{{ .VERSION }}-{{ .PLATFORM }}.tar.gz .
         mv ../truc-{{ .VERSION }}-{{ .PLATFORM }}.tar.gz ../result/truc-{{ .VERSION }}-{{ .PLATFORM }}.tar.gz
