@@ -9,6 +9,10 @@ All notable changes to this project will be documented in this file.
 - *(tui)* Add verbose flag (#3)
 - *(ux)* Add copying to the system clipboard with -c flag (#4)
 
+### Fixes
+
+- *(tui)* Fix result view for single steps (#5)
+
 ## [0.1.1] - 2025-08-07
 
 ### Fixes
