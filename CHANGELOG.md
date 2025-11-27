@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Features
+
+- *(tui)* Add verbose flag (#3)
+
 ## [0.1.1] - 2025-08-07
 
 ### Fixes
