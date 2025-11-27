@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 - *(tui)* Add verbose flag (#3)
+- *(ux)* Add copying to the system clipboard with -c flag (#4)
 
 ## [0.1.1] - 2025-08-07
 
