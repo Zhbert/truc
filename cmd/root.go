@@ -45,8 +45,12 @@ Allows you to quickly calculate a relative link based on the source and destinat
 	Run: func(cmd *cobra.Command, args []string) {
 		source, _ := cmd.Flags().GetString("source")
 		target, _ := cmd.Flags().GetString("target")
-		fmt.Printf("%15s %-s\n", "Source URL:", source)
-		fmt.Printf("%15s %-s\n", "Target URL:", target)
+		verbose, _ := cmd.Flags().GetBool("verbose")
+
+		if verbose {
+			fmt.Printf("%15s %-s\n", "Source URL:", source)
+			fmt.Printf("%15s %-s\n", "Target URL:", target)
+		}
 
 		sourceDomain, err := extractDomain(source)
 		if err != nil {
@@ -78,12 +82,16 @@ Allows you to quickly calculate a relative link based on the source and destinat
 		for i, part := range sourceParts {
 			if i < len(targetParts) {
 				if targetParts[i] == part {
-					fmt.Printf("%s%d: %s%s\n", Green, i, part, Reset)
+					if verbose {
+						fmt.Printf("%s%d: %s%s\n", Green, i, part, Reset)
+					}
 				} else {
-					if i <= len(targetParts) {
-						fmt.Printf("%s%d: %s -> %s%s\n", Red, i, part, targetParts[i], Reset)
-					} else {
-						fmt.Printf("%s%d: %s%s\n", Red, i, part, Reset)
+					if verbose {
+						if i <= len(targetParts) {
+							fmt.Printf("%s%d: %s -> %s%s\n", Red, i, part, targetParts[i], Reset)
+						} else {
+							fmt.Printf("%s%d: %s%s\n", Red, i, part, Reset)
+						}
 					}
 					if discrepancyPosition == 0 {
 						discrepancyPosition = i
@@ -92,7 +100,9 @@ Allows you to quickly calculate a relative link based on the source and destinat
 			}
 		}
 		delta := len(sourceParts) - discrepancyPosition - 1
-		fmt.Printf("Levels back: %d\n", delta)
+		if verbose {
+			fmt.Printf("Levels back: %d\n", delta)
+		}
 		var resultUrl string
 		for i := 0; i < delta; i++ {
 			resultUrl += "../"
@@ -104,6 +114,7 @@ Allows you to quickly calculate a relative link based on the source and destinat
 			}
 		}
 		fmt.Printf("%15s %s%-s\n", "Result URL:", Green, resultUrl)
+
 	},
 }
 
@@ -127,4 +138,5 @@ func init() {
 	// when this action is called directly.
 	rootCmd.Flags().StringP("source", "s", "", "Specify the source URL")
 	rootCmd.Flags().StringP("target", "t", "", "Specify the target URL")
+	rootCmd.Flags().BoolP("verbose", "v", false, "Enable full log")
 }
