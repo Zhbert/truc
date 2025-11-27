@@ -23,6 +23,8 @@ For example:
 truc -s https://github.com/Zhbert/impomoro/tree/main/internal -t https://github.com/Zhbert/colligendis`
 ```
 
+> You can use the `-c` (`--copy`) key to automatically copy the result to the clipboard.
+
 Result:
 
 ```text
@@ -56,9 +58,11 @@ Available Commands:
   version     Show the utility version
 
 Flags:
+  -c, --copy            Copy to clipboard
   -h, --help            help for truc
   -s, --source string   Specify the source URL
   -t, --target string   Specify the target URL
+  -v, --verbose         Enable full log
 
 Use "truc [command] --help" for more information about a command.
 ```

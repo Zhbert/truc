@@ -105,9 +105,14 @@ Allows you to quickly calculate a relative link based on the source and destinat
 		if verbose {
 			fmt.Printf("Levels back: %d\n", delta)
 		}
+
 		var resultUrl string
-		for i := 0; i < delta; i++ {
-			resultUrl += "../"
+		if delta == 0 {
+			resultUrl += "./"
+		} else {
+			for i := 0; i < delta; i++ {
+				resultUrl += "../"
+			}
 		}
 		for i := discrepancyPosition; i < len(targetParts); i++ {
 			resultUrl += targetParts[i]
