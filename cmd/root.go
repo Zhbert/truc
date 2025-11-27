@@ -24,6 +24,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/atotto/clipboard"
 	"github.com/spf13/cobra"
 	"os"
 	"strings"
@@ -46,6 +47,7 @@ Allows you to quickly calculate a relative link based on the source and destinat
 		source, _ := cmd.Flags().GetString("source")
 		target, _ := cmd.Flags().GetString("target")
 		verbose, _ := cmd.Flags().GetBool("verbose")
+		cpToClipboard, _ := cmd.Flags().GetBool("copy")
 
 		if verbose {
 			fmt.Printf("%15s %-s\n", "Source URL:", source)
@@ -114,7 +116,15 @@ Allows you to quickly calculate a relative link based on the source and destinat
 			}
 		}
 		fmt.Printf("%15s %s%-s\n", "Result URL:", Green, resultUrl)
-
+		if cpToClipboard {
+			err := clipboard.WriteAll(resultUrl)
+			if err != nil {
+				fmt.Println(err)
+			}
+			if verbose {
+				fmt.Println(Reset + "The URL has been copied to the clipboard.")
+			}
+		}
 	},
 }
 
@@ -139,4 +149,5 @@ func init() {
 	rootCmd.Flags().StringP("source", "s", "", "Specify the source URL")
 	rootCmd.Flags().StringP("target", "t", "", "Specify the target URL")
 	rootCmd.Flags().BoolP("verbose", "v", false, "Enable full log")
+	rootCmd.Flags().BoolP("copy", "c", false, "Copy to clipboard")
 }
