@@ -58,11 +58,12 @@ Available Commands:
   version     Show the utility version
 
 Flags:
-  -c, --copy            Copy to clipboard
-  -h, --help            help for truc
-  -s, --source string   Specify the source URL
-  -t, --target string   Specify the target URL
-  -v, --verbose         Enable full log
+  -c, --copy                        Copy to clipboard
+  -h, --help                        help for truc
+  -s, --source string               Specify the source URL
+  -d, --stop-if-different-domains   Enabling stops for different domains
+  -t, --target string               Specify the target URL
+  -v, --verbose                     Enable full log
 
 Use "truc [command] --help" for more information about a command.
 ```
