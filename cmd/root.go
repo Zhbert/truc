@@ -31,9 +31,10 @@ import (
 )
 
 const (
-	Reset = "\033[0m"
-	Red   = "\033[31m"
-	Green = "\033[32m"
+	Reset      = "\033[0m"
+	Red        = "\033[31m"
+	Green      = "\033[32m"
+	DarkYellow = "\033[33m"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -48,6 +49,7 @@ Allows you to quickly calculate a relative link based on the source and destinat
 		target, _ := cmd.Flags().GetString("target")
 		verbose, _ := cmd.Flags().GetBool("verbose")
 		cpToClipboard, _ := cmd.Flags().GetBool("copy")
+		ignoreDifferentDomains, _ := cmd.Flags().GetBool("stop-if-different-domains")
 
 		if verbose {
 			fmt.Printf("%15s %-s\n", "Source URL:", source)
@@ -64,8 +66,12 @@ Allows you to quickly calculate a relative link based on the source and destinat
 		}
 
 		if targetDomain != sourceDomain {
-			fmt.Println(Red + "URL domains do not match!" + Reset)
-			return
+			if ignoreDifferentDomains {
+				fmt.Println(Red + "URL domains do not match!" + Reset)
+				return
+			} else {
+				fmt.Println(DarkYellow + "URL domains do not match!" + Reset)
+			}
 		}
 
 		source, err = removeProtocol(source)
@@ -120,7 +126,7 @@ Allows you to quickly calculate a relative link based on the source and destinat
 				resultUrl += "/"
 			}
 		}
-		fmt.Printf("%15s %s%-s\n", "Result URL:", Green, resultUrl)
+		fmt.Printf("%s %s%-s\n", "Result URL:", Green, resultUrl)
 		if cpToClipboard {
 			err := clipboard.WriteAll(resultUrl)
 			if err != nil {
@@ -155,4 +161,5 @@ func init() {
 	rootCmd.Flags().StringP("target", "t", "", "Specify the target URL")
 	rootCmd.Flags().BoolP("verbose", "v", false, "Enable full log")
 	rootCmd.Flags().BoolP("copy", "c", false, "Copy to clipboard")
+	rootCmd.Flags().BoolP("stop-if-different-domains", "d", false, "Enabling stops for different domains")
 }
