@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Features
+
+- *(tui)* Fix the behavior for different domains (#6)
+
 ## [0.2] - 2025-11-27
 
 ### Features
