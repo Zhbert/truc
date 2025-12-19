@@ -23,3 +23,8 @@ func removeProtocol(urlString string) (string, error) {
 
 	return parsedURL.Host + parsedURL.Path + parsedURL.RawQuery, nil
 }
+
+func removeDomain(urlString string, domain string) string {
+	prefix := domain + "/"
+	return strings.TrimPrefix(urlString, prefix)
+}

@@ -70,7 +70,7 @@ Allows you to quickly calculate a relative link based on the source and destinat
 				fmt.Println(Red + "URL domains do not match!" + Reset)
 				return
 			} else {
-				fmt.Println(DarkYellow + "URL domains do not match!" + Reset)
+				fmt.Println(DarkYellow + "WARNING!: " + Reset + "URL domains do not match!")
 			}
 		}
 
@@ -78,10 +78,13 @@ Allows you to quickly calculate a relative link based on the source and destinat
 		if err != nil {
 			fmt.Println(err)
 		}
+		source = removeDomain(source, sourceDomain)
+
 		target, err = removeProtocol(target)
 		if err != nil {
 			fmt.Println(err)
 		}
+		target = removeDomain(target, targetDomain)
 
 		sourceParts := strings.Split(source, "/")
 		targetParts := strings.Split(target, "/")
