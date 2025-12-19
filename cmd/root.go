@@ -161,5 +161,5 @@ func init() {
 	rootCmd.Flags().StringP("target", "t", "", "Specify the target URL")
 	rootCmd.Flags().BoolP("verbose", "v", false, "Enable full log")
 	rootCmd.Flags().BoolP("copy", "c", false, "Copy to clipboard")
-	rootCmd.Flags().BoolP("stop-if-different-domains", "d", false, "Enabling stops for different domains")
+	rootCmd.Flags().BoolP("stop-if-different-domains", "", false, "Enabling stops for different domains")
 }
