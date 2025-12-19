@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 - *(tui)* Fix the behavior for different domains (#6)
+- *(tui)* Delete short key d
+- *(logic)* Fix the behavior for different domains
 
 ## [0.2] - 2025-11-27
 
