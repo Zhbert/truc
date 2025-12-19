@@ -61,7 +61,7 @@ Flags:
   -c, --copy                        Copy to clipboard
   -h, --help                        help for truc
   -s, --source string               Specify the source URL
-  -d, --stop-if-different-domains   Enabling stops for different domains
+      --stop-if-different-domains   Enabling stops for different domains
   -t, --target string               Specify the target URL
   -v, --verbose                     Enable full log
 
