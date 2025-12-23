@@ -21,7 +21,7 @@ func removeProtocol(urlString string) (string, error) {
 		return "", err
 	}
 
-	return parsedURL.Host + parsedURL.Path + parsedURL.RawQuery, nil
+	return parsedURL.Host + parsedURL.Path + parsedURL.RawQuery + "#" + parsedURL.Fragment, nil
 }
 
 func removeDomain(urlString string, domain string) string {
