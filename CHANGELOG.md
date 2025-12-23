@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Fixes
+
+- *(tui)* Fix the missing anchors in the final link (#8)
+
 ## [0.2.1] - 2025-12-19
 
 ### Features
